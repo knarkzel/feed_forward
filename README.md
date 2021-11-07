@@ -13,7 +13,7 @@ import feed_forward { network }
 
 fn main() {
 	mut network := network([3, 5, 5, 5, 1])
-	network.process([0.25, 0.5, 0.75])
+	network.feed([0.25, 0.5, 0.75])
 	if network.output[0] > 0.5 {
 		// trigger action like jump
 	}

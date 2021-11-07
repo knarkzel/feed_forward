@@ -49,7 +49,7 @@ pub fn network(structure []int) Network {
 	return network
 }
 
-pub fn (mut n Network) process(input []f32) {
+pub fn (mut n Network) feed(input []f32) {
 	for i, mut node in n.nodes[0] {
 		node.data = input[i]
 	}

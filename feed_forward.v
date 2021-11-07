@@ -1,7 +1,6 @@
 module feed_forward
 
 import rand
-import math { powf }
 
 fn relu(x f32) f32 {
 	return if x < 0 { 0.01 * x } else { 1 }

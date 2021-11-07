@@ -19,6 +19,6 @@ fn main() {
 	}
 	// genetic algorithms, used for creating new, better networks
 	network.mutate()
-	new_network := network.crossover(network([3, 5, 3]))
+	new_network := network.crossover(network([3, 5, 5, 5, 1])) // networks MUST have same layout
 }
 ```

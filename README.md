@@ -20,7 +20,7 @@ import feed_forward { network }
 fn main() {
 	mut network := network([3, 5, 5, 5, 1])
 	network.feed([0.25, 0.5, 0.75])
-	if network.output[0] > 0.5 {
+	if network.output()[0] > 0.5 {
 		// trigger action like jump
 	}
 	// genetic algorithms, used for creating new, better networks
@@ -28,6 +28,5 @@ fn main() {
 	new_network := network.crossover(network([3, 5, 5, 5, 1])) // networks MUST have same layout
 }
 ```
-
 
 

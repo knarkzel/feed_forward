@@ -2,19 +2,19 @@ module feed_forward
 
 import rand
 
-fn relu(x f32) f32 {
+fn relu(x f64) f64 {
 	return if x < 0 { 0.01 * x } else { 1 }
 }
 
 struct Node {
 pub mut:
-	data    f32
-	bias    f32
-	weights []f32
+	data    f64
+	bias    f64
+	weights []f64
 }
 
 fn (nx Node) average(ny Node) Node {
-	mut weights := []f32{}
+	mut weights := []f64{}
 	for i in 0 .. nx.weights.len {
 		weights << (nx.weights[i] + ny.weights[i]) / 2
 	}
@@ -34,12 +34,12 @@ pub fn network(structure []int) ?Network {
 	for i in 0 .. structure.len - 1 {
 		mut nodes := []Node{}
 		for _ in 0 .. structure[i] {
-			mut weights := []f32{}
+			mut weights := []f64{}
 			for _ in 0 .. structure[i + 1] {
-				weights << rand.f32_in_range(-1, 1) ?
+				weights << rand.f64_in_range(-1, 1) ?
 			}
 			nodes << Node{
-				bias: rand.f32_in_range(-1, 1) ?
+				bias: rand.f64_in_range(-1, 1) ?
 				weights: weights
 			}
 		}
@@ -49,13 +49,13 @@ pub fn network(structure []int) ?Network {
 	return network
 }
 
-pub fn (mut n Network) feed(input []f32) {
+pub fn (mut n Network) feed(input []f64) {
 	for i, mut node in n.nodes[0] {
 		node.data = input[i]
 	}
 	for i in 1 .. n.nodes.len {
 		for j in 0 .. n.nodes[i].len {
-			mut sum := f32(0)
+			mut sum := f64(0)
 			for node in n.nodes[i - 1] {
 				sum += node.data * node.weights[j] + node.bias
 			}
@@ -64,17 +64,17 @@ pub fn (mut n Network) feed(input []f32) {
 	}
 }
 
-pub fn (n Network) output() []f32 {
+pub fn (n Network) output() []f64 {
 	return n.nodes.last().map(it.data)
 }
 
 pub fn (mut n Network) mutate() ? {
 	for mut layer in n.nodes {
 		for mut node in layer {
-			if rand.f32() < 0.2 {
-				node.bias *= rand.f32_in_range(0.5, 1) ?
+			if rand.f64() < 0.2 {
+				node.bias *= rand.f64_in_range(0.5, 1) ?
 				for mut weight in node.weights {
-					weight *= rand.f32_in_range(0.5, 1) ?
+					weight *= rand.f64_in_range(0.5, 1) ?
 				}
 			}
 		}

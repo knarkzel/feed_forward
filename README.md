@@ -3,10 +3,16 @@
 `feed_forward` is a simple neural network implementation using feed forward and
 genetic algorithms.
 
+## Install
+
+```bash
+v install --git https://github.com/knarkzel/feed_forward
+```
+
 ## Example
 
-In following example we create a network with 1 input layer, 3 hidden layers
-and 1 output layer.
+In following example we create a network with 1 input layer (3 nodes),
+3 hidden layers (5 nodes each) and 1 output layer (1 node).
 
 ```vlang
 import feed_forward { network }
@@ -22,3 +28,6 @@ fn main() {
 	new_network := network.crossover(network([3, 5, 5, 5, 1])) // networks MUST have same layout
 }
 ```
+
+
+

@@ -29,17 +29,17 @@ pub mut:
 	nodes [][]Node
 }
 
-pub fn network(structure []int) Network {
+pub fn network(structure []int) ?Network {
 	mut network := Network{}
 	for i in 0 .. structure.len - 1 {
 		mut nodes := []Node{}
 		for _ in 0 .. structure[i] {
 			mut weights := []f32{}
 			for _ in 0 .. structure[i + 1] {
-				weights << rand.f32_in_range(-1, 1)
+				weights << rand.f32_in_range(-1, 1) ?
 			}
 			nodes << Node{
-				bias: rand.f32_in_range(-1, 1)
+				bias: rand.f32_in_range(-1, 1) ?
 				weights: weights
 			}
 		}
@@ -68,13 +68,13 @@ pub fn (n Network) output() []f32 {
 	return n.nodes.last().map(it.data)
 }
 
-pub fn (mut n Network) mutate() {
+pub fn (mut n Network) mutate() ? {
 	for mut layer in n.nodes {
 		for mut node in layer {
 			if rand.f32() < 0.2 {
-				node.bias *= rand.f32_in_range(0.5, 1)
+				node.bias *= rand.f32_in_range(0.5, 1) ?
 				for mut weight in node.weights {
-					weight *= rand.f32_in_range(0.5, 1)
+					weight *= rand.f32_in_range(0.5, 1) ?
 				}
 			}
 		}

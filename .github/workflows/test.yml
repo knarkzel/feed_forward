@@ -12,6 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build V
-        run: git clone https://github.com/vlang/v ../v && cd ../v && git checkout c97f0c5 && make
+        run: git clone https://github.com/vlang/v ../v && cd ../v && git checkout c7a9242 && make
       - name: Test vom
         run: ../v/v test .

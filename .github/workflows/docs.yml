@@ -1,0 +1,24 @@
+name: docs
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  document_vom:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build V
+        run: git clone https://github.com/vlang/v ../v && cd ../v && git checkout c97f0c5 && make
+      - name: Craft documentation
+        run: ../v/v doc -m -f html .
+      - name: Fix title
+        run: sed -i 's/ | vdoc/vom | vdoc/' _docs/index.html
+      - name: Deploy to Github Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.9
+        with:
+          branch: docs
+          folder: _docs

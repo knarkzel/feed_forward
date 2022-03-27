@@ -1,6 +1,6 @@
 # feed_forward
 
-`feed_forward` is a simple neural network implementation using feed forward and
+`feed_forward` is a simple neural network implementation that uses feed forward and
 genetic algorithms.
 
 ## Install
